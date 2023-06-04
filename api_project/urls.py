@@ -17,8 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from api.views import BookView
+from django.conf import settings
+from image_converter.views import ImageConverterView
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('books/', BookView.as_view(), name='book-list'),
-]
+    path('api/convert-image/', ImageConverterView.as_view(), name='convert_image'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
